@@ -19,11 +19,16 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+
+import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ArticleIcon from '@mui/icons-material/Article';
 import GroupsIcon from '@mui/icons-material/Groups';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { Button } from '@mui/material';
 
 
 const drawerWidth = 240;
@@ -115,10 +120,11 @@ export default function MiniDrawer() {
   ];
 
   return (
+
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -142,8 +148,40 @@ export default function MiniDrawer() {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
-        <Divider />
+        
+        <Stack
+          direction= "row"
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          mt={2.5}
+          sx={{ display: open ? 'flex' : 'none'}}
+        >
+            <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
+          </Stack>
 
+        <Divider />
+        
+        <Stack
+          direction= "column"
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          mt={2.5}
+          sx={{ display: open ? 'flex' : 'none'}}
+          >
+            <Avatar
+              alt="ADM"
+              src="/images/funcionaria.jpg"
+              sx={{width: 60, height:60 }}
+            />
+            <h1>Angela Lima</h1>
+            <p>Developer Junior</p>
+            <Button variant="outlined" color="secondary" startIcon={<AccessAlarmIcon />}>
+              Registrar Ponto
+            </Button>
+          </Stack>
+            
         <List>
             {menuItems.map((item, index) => (
                 <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>

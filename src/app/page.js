@@ -7,7 +7,7 @@ export default function Home() {
     <div className="flex ">
       <Sidebar />
       <main className="grow p-6">
-        <h1>Bem-vindo ao seu app Next.js!</h1>
+        <h1></h1>
       </main>
     </div>
   )
