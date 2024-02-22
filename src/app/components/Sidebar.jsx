@@ -1,34 +1,36 @@
 'use client'
-
 import * as React from 'react';
+import { useState } from "react";
+
+// BIBLIOTECA
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MuiDrawer from '@mui/material/Drawer';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import MenuIcon from '@mui/icons-material/Menu';
+import MuiAppBar from '@mui/material/AppBar';
+import Avatar from '@mui/material/Avatar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import MuiDrawer from '@mui/material/Drawer';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
-import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import ArticleIcon from '@mui/icons-material/Article';
-import GroupsIcon from '@mui/icons-material/Groups';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import GroupsIcon from '@mui/icons-material/Groups';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import { Button } from '@mui/material';
 
 
 const drawerWidth = 240;
@@ -98,7 +100,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({children}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -111,13 +113,15 @@ export default function MiniDrawer() {
   };
 
   const menuItems = [
-    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon /> },
-    { text: 'Cadastrar Funcionário', icon: <GroupAddIcon /> },
-    { text: 'Controle de Ponto', icon: <ArticleIcon /> },
-    { text: 'Gerenciar Equipe', icon: <GroupsIcon /> },
-    { text: 'Calendário', icon: <CalendarMonthIcon /> },
-    { text: 'FAQ', icon: <QuestionMarkIcon /> },
+    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href:'../pages/cadastroEmpresa'},
+    { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'../pages/cadastroColaborador' },
+    { text: 'Controle de Ponto', icon: <ArticleIcon />, href:'../pages/controleDePonto'},
+    { text: 'Gerenciar Equipe', icon: <GroupsIcon />, href:'../pages/gerenciarEquipe' },
+    { text: 'Calendário', icon: <CalendarMonthIcon />, href:'../pages/calendario'},
+    { text: 'FAQ', icon: <QuestionMarkIcon />, href:'../pages/FAQ'},
   ];
+
+  const [content, setContent] = useState(children)
 
   return (
 
@@ -191,6 +195,7 @@ export default function MiniDrawer() {
                     justifyContent: open ? 'initial' : 'center',
                     px: 2.5,
                     }}
+                    href={item.href}
                 >
                     <ListItemIcon
                     sx={{
@@ -203,44 +208,17 @@ export default function MiniDrawer() {
                     </ListItemIcon>
                     <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
-                </ListItem>
+                </ListItem>         
             ))}
         </List>
 
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Typography paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non
-          enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
-          imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
-          Convallis convallis tellus id interdum velit laoreet id donec ultrices.
-          Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-          adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra
-          nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum
-          leo. Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis
-          feugiat vivamus at augue. At augue eget arcu dictum varius duis at
-          consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem donec massa
-          sapien faucibus et molestie ac.
-        </Typography>
-        <Typography paragraph>
-          Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper
-          eget nulla facilisi etiam dignissim diam. Pulvinar elementum integer enim
-          neque volutpat ac tincidunt. Ornare suspendisse sed nisi lacus sed viverra
-          tellus. Purus sit amet volutpat consequat mauris. Elementum eu facilisis
-          sed odio morbi. Euismod lacinia at quis risus sed vulputate odio. Morbi
-          tincidunt ornare massa eget egestas purus viverra accumsan in. In hendrerit
-          gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-          et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis
-          tristique sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis
-          eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla
-          posuere sollicitudin aliquam ultrices sagittis orci a.
-        </Typography>
+        {content}
       </Box>
     </Box>
   );
 }
 
 
-// import Avatar from '@mui/material/Avatar';
