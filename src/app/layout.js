@@ -1,6 +1,9 @@
+'use client'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Home from './page';
+import Main from './components/Main';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,7 +17,11 @@ export default function RootLayout({ children }) {
     <html lang="pt-br">
       <body className={inter.className}>
         <AppRouterCacheProvider>
-          {children}
+          <Home />
+          <Main>
+            {console.log(children)}
+            {children}
+          </Main>
         </AppRouterCacheProvider>
         
       </body>

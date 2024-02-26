@@ -1,6 +1,7 @@
 'use client'
 import * as React from 'react';
-import { useState } from "react";
+import Link from 'next/link';
+import Main from './Main';
 
 // BIBLIOTECA
 import { styled, useTheme } from '@mui/material/styles';
@@ -100,7 +101,9 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-export default function MiniDrawer({children}) {
+//FUNÇÃO DA PÁGINA
+
+export default function SideBar({children}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -112,23 +115,24 @@ export default function MiniDrawer({children}) {
     setOpen(false);
   };
 
-  const menuItems = [
-    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href:'../pages/cadastroEmpresa'},
-    { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'../pages/cadastroColaborador' },
-    { text: 'Controle de Ponto', icon: <ArticleIcon />, href:'../pages/controleDePonto'},
-    { text: 'Gerenciar Equipe', icon: <GroupsIcon />, href:'../pages/gerenciarEquipe' },
-    { text: 'Calendário', icon: <CalendarMonthIcon />, href:'../pages/calendario'},
-    { text: 'FAQ', icon: <QuestionMarkIcon />, href:'../pages/FAQ'},
-  ];
 
-  const [content, setContent] = useState(children)
+  const menuItems = [
+    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href: `/cadastroEmpresa`},
+    { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'/cadastroColaborador' },
+    { text: 'Controle de Ponto', icon: <ArticleIcon />, href:'../pages/controleDePonto'},
+    { text: 'Gerenciar Equipe', icon: <GroupsIcon />, href:'/gerenciarEquipe' },
+    { text: 'Calendário', icon: <CalendarMonthIcon />, href:'/calendario'},
+    { text: 'FAQ', icon: <QuestionMarkIcon />, href:'/FAQ'},
+  ];
 
   return (
 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar >
+        <Toolbar 
+          sx={{ backgroundColor: '#404040' }} 
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -141,9 +145,11 @@ export default function MiniDrawer({children}) {
           >
             <MenuIcon />
           </IconButton>
+          <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
           <Typography variant="h6" noWrap component="div">
             Mini variant drawer
           </Typography>
+
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -161,7 +167,7 @@ export default function MiniDrawer({children}) {
           mt={2.5}
           sx={{ display: open ? 'flex' : 'none'}}
         >
-            <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
+            {/* <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' /> */}
           </Stack>
 
         <Divider />
@@ -189,34 +195,38 @@ export default function MiniDrawer({children}) {
         <List>
             {menuItems.map((item, index) => (
                 <ListItem key={item.text} disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
-                    sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                    }}
-                    href={item.href}
-                >
-                    <ListItemIcon
-                    sx={{
-                        minWidth: 0,
-                        mr: open ? 3 : 'auto',
-                        justifyContent: 'center',
-                    }}
-                    >
-                    {item.icon}
-                    </ListItemIcon>
-                    <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
+                  <Link href={item.href}>
+
+                    <ListItemButton
+                      sx={{
+                      minHeight: 48,
+                      justifyContent: open ? 'initial' : 'center',
+                      px: 2.5,
+                      }}
+                     >
+                      <ListItemIcon
+                      sx={{
+                          minWidth: 0,
+                          mr: open ? 3 : 'auto',
+                          justifyContent: 'center',
+                      }}
+                      >
+                      {item.icon}
+                      </ListItemIcon>
+                      <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
+                    </ListItemButton>
+
+                  </Link>
+                
                 </ListItem>         
             ))}
         </List>
 
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        {content}
-      </Box>
+      <Main>
+        {console.log(children)}
+        {children}
+      </Main>
     </Box>
   );
 }

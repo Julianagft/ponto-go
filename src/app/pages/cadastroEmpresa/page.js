@@ -6,14 +6,13 @@ import { useState } from "react";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { styled, useTheme } from '@mui/material/styles';
+import Main from '@/app/components/Main';
 
 
-export default function BasicTextFields({children}) {
-
-    const [pageContent, setPageContent] = useState(children)
+export default function CadastroEmpresa({children}) {
 
   return (
-    
+
         <Box
             component="form"
             sx={{
@@ -26,8 +25,7 @@ export default function BasicTextFields({children}) {
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
             <TextField id="outlined-basic" label="Outlined" variant="outlined" />
             
+            {children}
         </Box>
-
-    
-  );
+ );
 }
