@@ -1,7 +1,6 @@
+'use client'
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from "react";
-
-
 
 import Box from '@mui/material/Box';
 
@@ -15,15 +14,21 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 
 export default function Main({children}) {
-    
-    const [content, setContent] = useState(children)
-      
+
     return (
-        <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-            
-            {content}           
-        </Box>
-    
+            <Box
+                component="main"
+                sx={
+                    {   flexGrow: 1,
+                        p: 3,
+                        width: '100vw',
+                    }
+                }
+            >
+            <DrawerHeader />
+                {children}
+            </Box>
+        
+
     )
 }

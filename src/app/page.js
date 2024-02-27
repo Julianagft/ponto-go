@@ -1,16 +1,14 @@
 'use client'
-import * as React from 'react';
 import Link from 'next/link';
-import Main from './components/Main';
-
+import * as React from 'react';
+import Main from './Components/Main';
 
 // BIBLIOTECA
-import { styled, useTheme } from '@mui/material/styles';
-import { Button } from '@mui/material';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
@@ -25,7 +23,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
+import { styled, useTheme } from '@mui/material/styles';
 
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import ArticleIcon from '@mui/icons-material/Article';
@@ -33,8 +31,6 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupsIcon from '@mui/icons-material/Groups';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-
-
 
 const drawerWidth = 240;
 
@@ -119,9 +115,9 @@ export default function Home({children}) {
 
 
   const menuItems = [
-    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href: `/cadastroEmpresa`},
+    { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href: `/cadastroEmpresas`},
     { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'/cadastroColaborador' },
-    { text: 'Controle de Ponto', icon: <ArticleIcon />, href:'../pages/controleDePonto'},
+    { text: 'Controle de Ponto', icon: <ArticleIcon />, href:'/controleDePonto'},
     { text: 'Gerenciar Equipe', icon: <GroupsIcon />, href:'/gerenciarEquipe' },
     { text: 'Calendário', icon: <CalendarMonthIcon />, href:'/calendario'},
     { text: 'FAQ', icon: <QuestionMarkIcon />, href:'/FAQ'},
@@ -133,7 +129,7 @@ export default function Home({children}) {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar 
-          sx={{ backgroundColor: '#404040' }} 
+          sx={{ backgroundColor: '#818274' }} 
         >
           <IconButton
             color="inherit"
@@ -148,9 +144,7 @@ export default function Home({children}) {
             <MenuIcon />
           </IconButton>
           <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
-          <Typography variant="h6" noWrap component="div">
-            Mini variant drawer
-          </Typography>
+         
 
         </Toolbar>
       </AppBar>
@@ -225,7 +219,7 @@ export default function Home({children}) {
         </List>
 
       </Drawer>
-      
+      <Main>{children}</Main> 
     </Box>
   );
 }
