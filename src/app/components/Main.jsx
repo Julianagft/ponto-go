@@ -1,8 +1,5 @@
 'use client'
-import { styled, useTheme } from '@mui/material/styles';
-import { useState } from "react";
-
-import Box from '@mui/material/Box';
+import { styled, Box} from '@mui/material';
 
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
@@ -28,7 +25,5 @@ export default function Main({children}) {
             <DrawerHeader />
                 {children}
             </Box>
-        
-
-    )
+   )
 }

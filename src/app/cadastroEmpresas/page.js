@@ -1,16 +1,9 @@
   'use client'
   import * as React from 'react';
-  import Box from '@mui/material/Box';
-  import OutlinedInput from '@mui/material/OutlinedInput';
-  import InputLabel from '@mui/material/InputLabel';
-  import FormControl from '@mui/material/FormControl';
-  import Typography from '@mui/material/Typography';
-
-
+  import { Box, OutlinedInput, InputLabel, FormControl, Typography } from '@mui/material';
 
 
   export default function CadastroEmpresas({children}) {
-
     
     return (
       <div className='w-full p-2.5'>
