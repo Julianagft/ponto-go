@@ -1,8 +1,10 @@
 'use client'
 import * as React from 'react';
 
-import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Typography, Grid, styled } from '@mui/material';
+import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Typography, Grid, styled, Stack} from '@mui/material';
+import {grey} from '@mui/material/colors';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
+import ColorButtons from '../Components/ColorButtons';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -16,12 +18,24 @@ const VisuallyHiddenInput = styled('input')({
   width: 2,
 });
 
+
 //FUNÇÃO DA PÁGINA
 
 export default function CadastroColaborador({ children }) {
 
   const [CLT, setCLT] = React.useState('');
 
+  const CustomButton = styled(Button)(({ theme }) => ({
+    backgroundColor: grey[50],
+    color: theme.palette.getContrastText(grey[500]),
+    border: `1px solid ${grey[400]}`,
+    '&:hover': {
+      border: `1px solid ${grey[700]}`,
+      backgroundColor: grey[50]
+    },
+  }));
+
+  
   const handleChange = (event) => {
     setCLT(event.target.value);
   };
@@ -136,9 +150,8 @@ export default function CadastroColaborador({ children }) {
               {/* Coluna 3 */}
               <Grid item xs={12} sm={6} md={3}>
                 <FormControl sx={{ m: 1, width:'80%'}} variant="outlined">
-                <Button
+                <CustomButton
                   variant="outlined"
-                  color= "secondary"
                   size="large"
                   component="label"
                   role={undefined}
@@ -149,7 +162,7 @@ export default function CadastroColaborador({ children }) {
                     type="file"  
                     accept="image/*"
                   />
-                </Button>
+                </CustomButton>
                       
                 </FormControl>
               </Grid>
@@ -232,7 +245,11 @@ export default function CadastroColaborador({ children }) {
                 </FormControl>
               </Grid>
             </Grid>
+            <Stack>
+              <ColorButtons label="CADASTRAR COLABORADOR" />
+            </Stack>
             </Box>
+            
         {children}
       </Box>
     </div>

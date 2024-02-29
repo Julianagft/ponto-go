@@ -1,9 +1,12 @@
   'use client'
   import * as React from 'react';
-  import { Box, OutlinedInput, InputLabel, FormControl, Typography } from '@mui/material';
+  import { Box, OutlinedInput, InputLabel, FormControl, Typography} from '@mui/material';
+import ColorButtons from '../Components/ColorButtons';
 
 
-  export default function CadastroEmpresas({children}) {
+  export default function CadastroEmpresas() {
+
+
     
     return (
       <div className='w-full p-2.5'>
@@ -67,8 +70,8 @@
                   />
                 </FormControl>
             </div>
+            <ColorButtons label="CADASTRAR EMPRESA"></ColorButtons>
             
-            {children}
           </Box>
       </div>
     );
