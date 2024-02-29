@@ -4,12 +4,10 @@ import * as React from 'react';
 import Main from './Components/Main';
 
 // BIBLIOTECA
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import CorporateFareIcon from '@mui/icons-material/CorporateFare';
-import MenuIcon from '@mui/icons-material/Menu';
+
 import { Button } from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -19,18 +17,26 @@ import IconButton from '@mui/material/IconButton';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Toolbar from '@mui/material/Toolbar';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled, useTheme,} from '@mui/material/styles';
 
+//ICONS
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import CorporateFareIcon from '@mui/icons-material/CorporateFare';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccessAlarmIcon from '@mui/icons-material/AccessAlarm';
 import ArticleIcon from '@mui/icons-material/Article';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupsIcon from '@mui/icons-material/Groups';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+
+//COLORS
+import { grey } from '@mui/material/colors';
+
 
 const drawerWidth = 240;
 
@@ -123,13 +129,16 @@ export default function Home({children}) {
     { text: 'FAQ', icon: <QuestionMarkIcon />, href:'/FAQ'},
   ];
 
+  const color1 = grey[400]
+  const color2 = grey[900]
+
   return (
  
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar 
-          sx={{ backgroundColor: '#818274' }} 
+          sx={{ backgroundColor: color1 }} 
         >
           <IconButton
             color="inherit"
@@ -150,7 +159,7 @@ export default function Home({children}) {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose} style={{ color: color2 }} >
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
@@ -183,9 +192,12 @@ export default function Home({children}) {
             />
             <h1>Angela Lima</h1>
             <p>Developer Junior</p>
+            <Link href="/registrarPonto">
             <Button variant="outlined" color="secondary" startIcon={<AccessAlarmIcon />}>
               Registrar Ponto
             </Button>
+            </Link>
+            
           </Stack>
             
         <List>

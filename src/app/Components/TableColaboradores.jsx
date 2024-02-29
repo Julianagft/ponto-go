@@ -1,17 +1,29 @@
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+function createData(id, name, data, hora) {
+    return {id, name, data, hora};
   }
-  
-  const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
-  ];
 
+  const dataAtual = new Date()
+  let anoAtual = dataAtual.getFullYear();
+  let mesAtual = dataAtual.getMonth() + 1;
+  let diaAtual = dataAtual.getDate();
+
+  const fullData = (diaAtual< 10 ? '0' : '') + `${diaAtual}/`+ (mesAtual < 10 ? '0' : '') + `${mesAtual}/${anoAtual}`
+
+  const horaAtual = dataAtual.getHours();
+  const minutoAtual = dataAtual.getMinutes();
+  const segundoAtual = dataAtual.getSeconds();
+
+  const horario = (horaAtual < 10 ? '0' : '') + horaAtual + ':' + (minutoAtual < 10 ? '0' : '') + minutoAtual + ':' + (segundoAtual < 10 ? '0' : '') + segundoAtual;
+
+  const rows = [
+    createData(1,'Carlos Eduardo', fullData, horario),
+    createData(2,'Eva Green', fullData, horario),
+    createData(3,'Pedro Pascal',fullData, horario ),
+    createData(4,'João Grilo', fullData, horario),
+    createData(5,'José Inocêncio', fullData, horario),
+  ];
 
 
   export default function TableColaboradores() {
@@ -23,6 +35,7 @@ function createData(name, calories, fat, carbs, protein) {
                 <TableHead>
                 <TableRow>
                     <TableCell>ID</TableCell>
+                    <TableCell align="right">Nome</TableCell>
                     <TableCell align="right">Data</TableCell>
                     <TableCell align="right">Hora</TableCell>
                 </TableRow>
@@ -31,14 +44,15 @@ function createData(name, calories, fat, carbs, protein) {
                 <TableBody>
                 {rows.map((row) => (
                     <TableRow
-                    key={row.name}
+                    key={row.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                     >
                     <TableCell component="th" scope="row">
-                        {row.name}
+                        {row.id}
                     </TableCell>
-                    <TableCell align="right">{row.calories}</TableCell>
-                    <TableCell align="right">{row.fat}</TableCell>
+                    <TableCell align="right">{row.name}</TableCell>
+                    <TableCell align="right">{row.data}</TableCell>
+                    <TableCell align="right">{row.hora}</TableCell>
                     </TableRow>
                 ))}
                 </TableBody>

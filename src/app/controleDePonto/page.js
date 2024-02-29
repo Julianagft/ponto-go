@@ -1,8 +1,7 @@
 'use client'
 import * as React from 'react';
 
-import { Box } from '@mui/material';
-import {Typography, FormControl, TextField} from '@mui/material';
+import {Box, Typography, FormControl, TextField} from '@mui/material';
 import ColorButtons from '../Components/ColorButtons';
 import TableColaboradores from '../Components/TableColaboradores';
 

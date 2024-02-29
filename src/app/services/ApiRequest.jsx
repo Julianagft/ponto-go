@@ -1,3 +1,4 @@
+
 const axios = require('axios');
 
 async function GetPoinst() {
@@ -10,7 +11,12 @@ async function GetPoinst() {
         console.error('Erro na requisição:', error.message);
     }
     
-}
+};
+
+
+
+
+
 
  const requisitions = {
     GetPoinst,
