@@ -1,17 +1,14 @@
 'use client'
 import React, { useState } from 'react';
 import axios from 'axios';
-import requests from '@/services/ApiRequest';
+// import requests from '@/services/ApiRequest';
 
 // BIBLIOTECA
 import {OutlinedInput, InputLabel, FormControl, Typography} from '@mui/material';
 import ColorButtons from '../../Components/ColorButtons';
 
-
-
-  export default function CadastroEmpresas() {
-
-    const API = requests.cadastroEmpresa
+  export default function cadastroEmpresas() {
+  const URL = `https://pontogo-api.herokuapp.com/register-company`;
   
     const [formData, setFormData] = useState({
       nomeFantazia: '',
@@ -30,11 +27,20 @@ import ColorButtons from '../../Components/ColorButtons';
   
     const handleCadastrarEmpresa = async () => {
       try {
-        const response = await API(formData);
-        console.log('Resposta API:', response)
-        return alert('Empresa cadastrada com sucesso')
-      } catch(error) {
-        console.error('Erro ao enviar dados da empresa', error.message)
+        const response = await axios.post(
+          URL,
+          formData,
+          {
+            headers: {
+              'Authorization': '4A39A7E3-BBBE-4DAA-5109-6CD512993931' 
+            }
+          }
+        );
+    
+        console.log('Resposta API:', response);
+        alert('Empresa cadastrada com sucesso');
+      } catch (error) {
+        console.error('Erro ao enviar dados da empresa', error.message);
       }
     };
     
@@ -106,9 +112,7 @@ import ColorButtons from '../../Components/ColorButtons';
                   />
                 </FormControl>
             </div>
-            <ColorButtons label="CADASTRAR EMPRESA" onClick={handleCadastrarEmpresa} ></ColorButtons>
-            
-        
+            <ColorButtons label="CADASTRAR EMPRESA" onClick={handleCadastrarEmpresa} ></ColorButtons> 
       </div>
     );
   }
