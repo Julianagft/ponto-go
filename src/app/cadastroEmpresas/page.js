@@ -1,21 +1,19 @@
 'use client'
 import React, { useState } from 'react';
-import axios from 'axios';
-// import requests from '@/services/ApiRequest';
+import requests from '@/services/ApiRequest';
 
 // BIBLIOTECA
 import {OutlinedInput, InputLabel, FormControl, Typography} from '@mui/material';
 import ColorButtons from '../../Components/ColorButtons';
 
-  export default function cadastroEmpresas() {
-  const URL = `https://pontogo-api.herokuapp.com/register-company`;
+  export default function CadastroEmpresas() {
   
     const [formData, setFormData] = useState({
-      nomeFantazia: '',
+      name: '',
       razaoSocial: '',
       cnpj: '',
       email: '',
-      telefone: '',
+      phone: '',
     });
     
     const handleInputChange = (field, value) => {
@@ -27,17 +25,8 @@ import ColorButtons from '../../Components/ColorButtons';
   
     const handleCadastrarEmpresa = async () => {
       try {
-        const response = await axios.post(
-          URL,
-          formData,
-          {
-            headers: {
-              'Authorization': '4A39A7E3-BBBE-4DAA-5109-6CD512993931' 
-            }
-          }
-        );
-    
-        console.log('Resposta API:', response);
+        const response = await requests.cadastroEmpresa(formData)
+        console.log('Resposta API:', response.data);
         alert('Empresa cadastrada com sucesso');
       } catch (error) {
         console.error('Erro ao enviar dados da empresa', error.message);
@@ -62,7 +51,7 @@ import ColorButtons from '../../Components/ColorButtons';
                   variant="outlined"
                   label="Nome Fantazia"
                   color="secondary"
-                  onChange={(e) => handleInputChange('nomeFantazia', e.target.value)}
+                  onChange={(e) => handleInputChange('name', e.target.value)}
                 />
               </FormControl>
               <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
@@ -108,7 +97,7 @@ import ColorButtons from '../../Components/ColorButtons';
                     variant="outlined"
                     label="Telefone"
                     color="secondary"
-                    onChange={(e) => handleInputChange('telefone', e.target.value)}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
                   />
                 </FormControl>
             </div>
