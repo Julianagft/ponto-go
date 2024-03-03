@@ -17,6 +17,7 @@ export default function Main({children}) {
                 component="main"
                 sx={
                     {   flexGrow: 1,
+                        flexShrink: 1,
                         p: 3,
                         width: '100vw',
                     }

@@ -1,5 +1,5 @@
 import {Box, Typography} from '@mui/material';
-import TableEquipe from '../Components/TableEquipe';
+import TableEquipe from '../../Components/TableEquipe';
 
 
 export default function GerenciarEquipe() {

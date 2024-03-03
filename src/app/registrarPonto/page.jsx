@@ -3,7 +3,7 @@ import React from 'react';
 import * as yup from "yup";
 import { Formik } from "formik";
 
-import ColorButtons from "../Components/ColorButtons";
+import ColorButtons from "../../Components/ColorButtons";
 import { Box, FormControl, TextField, Typography } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -50,28 +50,8 @@ export default function RegistrarPonto() {
     
 
     return (
-        // <Box>
-            
-
-        //     <div className="mt-5" >
-        //         <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
-        //         <TextField
-        //           variant="outlined"
-        //           color="secondary"
-        //           label="Registrar Ponto"
-        //           type="date"
-        //           InputLabelProps={{
-        //             shrink: true,
-        //           }}
-        //           defaultValue={dataHoraFormatada}
-        //          />              
-        //          </FormControl>
-        //     </div>
-
-        //     <ColorButtons label="BATER PONTO" />
-        // </Box>
-
-        <Box m="20px">
+       
+       <Box m="20px">
             <Typography sx={{ paddingLeft: 3, fontSize: 25  , fontWeight: 'bold' }} variant="h6" noWrap component="div">
                 REGISTRO DE PONTO
             </Typography>

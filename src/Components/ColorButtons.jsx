@@ -11,13 +11,13 @@ const ColorButton = styled(Button)(({ theme }) => ({
     backgroundColor: purple[800],
   },
   '@media (max-width: 600px)': {
-    fontSize: '10px', // Define o tamanho da fonte para telas menores que 600 pixels
+    fontSize: '10px', 
   },
   '@media (min-width: 601px) and (max-width: 960px)': {
-    fontSize: '10px', // Define o tamanho da fonte para telas entre 601 e 960 pixels
+    fontSize: '10px', 
   },
   '@media (min-width: 961px)': {
-    fontSize: '13px', // Define o tamanho da fonte para telas maiores que 960 pixels
+    fontSize: '13px', 
   },
 }));
 

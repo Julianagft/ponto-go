@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Typography, Grid, styled, Stack} from '@mui/material';
 import {grey} from '@mui/material/colors';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
-import ColorButtons from '../Components/ColorButtons';
+import ColorButtons from '../../Components/ColorButtons';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',

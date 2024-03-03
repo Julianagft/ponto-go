@@ -1,7 +1,7 @@
 'use client'
 import Link from 'next/link';
 import * as React from 'react';
-import Main from './Components/Main';
+import Main from '../Components/Main';
 
 // BIBLIOTECA
 

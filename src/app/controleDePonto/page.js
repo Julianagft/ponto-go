@@ -2,8 +2,8 @@
 import * as React from 'react';
 
 import {Box, Typography, FormControl, TextField} from '@mui/material';
-import ColorButtons from '../Components/ColorButtons';
-import TableColaboradores from '../Components/TableColaboradores';
+import ColorButtons from '../../Components/ColorButtons';
+import TableColaboradores from '../../Components/TableColaboradores';
 
 
 
