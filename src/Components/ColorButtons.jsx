@@ -21,10 +21,10 @@ const ColorButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-export default function ColorButtons({label}) {
+export default function ColorButtons({label, onClick}) {
   
      return (
-      <div className='w-full md:w-1/2 ml-2.5'>
+      <div className='w-full md:w-1/2 ml-2.5' onClick={onClick}>
         <ColorButton variant="contained" size="large">
           {label}
         </ColorButton>
