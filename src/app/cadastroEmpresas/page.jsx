@@ -6,8 +6,12 @@ import requests from '@/services/ApiRequest';
 import {OutlinedInput, InputLabel, FormControl, Typography} from '@mui/material';
 import ColorButtons from '../../Components/ColorButtons';
 
-  export default function CadastroEmpresas() {
+
+
+export default function CadastroEmpresas() {
   
+
+  //CONF DE API  
     const [formData, setFormData] = useState({
       name: '',
       razaoSocial: '',
@@ -36,13 +40,14 @@ import ColorButtons from '../../Components/ColorButtons';
     return (
       <div className='w-full h-full flex flex-col justify-items-center content-center flex-wrap p-8'>
 
-            <Typography sx={{paddingLeft: 3, fontSize:30, fontWeight:'bold'}} variant="h6" noWrap component="div">
-              CADASTRAR EMPRESA 
-            </Typography>
-            <Typography sx={{paddingLeft: 3, fontSize:16}} color="secondary" variant="h6" noWrap component="div">
-              Cadastre nova uma empresa. 
-            </Typography>
+            <div className='pl-4  text-2xl md:text-3xl'>
+              <h1>CADASTRAR EMPRESA</h1>
+            </div>
 
+            <div className='text-purple-800 pl-4 mt-1'>
+              <h1>Cadastre nova uma empresa.</h1>
+            </div>
+           
             <div className='flex flex-col md:flex-row'>
               <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
                 <InputLabel color="secondary" >Nome Fantasia</InputLabel>
