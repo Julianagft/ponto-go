@@ -1,4 +1,4 @@
-import {Box, Typography} from '@mui/material';
+import {Box} from '@mui/material';
 import TableEquipe from '../../Components/TableEquipe';
 
 
@@ -8,12 +8,13 @@ export default function GerenciarEquipe() {
         <Box
           sx={{width:'100vw'}}
         >
-        <Typography sx={{paddingLeft: 3, fontSize:30, fontWeight:'bold'}} variant="h6" noWrap component="div">
-                GERENCIAR EQUIPE 
-        </Typography>
-        <Typography sx={{paddingLeft: 3, fontSize:16}} color="secondary" variant="h6" noWrap component="div">
-                Gerencie os Membros da Equipe. 
-        </Typography>
+          <div className='pl-4 font-bold text-2xl md:text-3xl'>
+            <h1>GERENCIAR EQUIPE</h1>
+          </div>
+
+          <div className='text-purple-800 pl-4 mt-1'>
+            <h1>Gerencie os Membros da Equipe.</h1>
+          </div>   
 
         <TableEquipe />
         

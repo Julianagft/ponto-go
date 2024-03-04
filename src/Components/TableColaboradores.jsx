@@ -1,3 +1,4 @@
+'use client'
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
 
 function createData(id, name, data, hora) {

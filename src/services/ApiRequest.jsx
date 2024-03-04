@@ -12,19 +12,20 @@ async function cadastroColaborador(dados) {
     return await API.post(`/register-employees?company-token-pg=InAcwq6mDMAzy0ubHDuc`, dados);
 }
 
+async function registroDePonto(dados) {
+    return await API.post(`/add-point?company-token-pg=H5mpdUQQ0hOPkFlDIH38&employee-token-pg=LnCDFZnDSCgbY44lguFh`, dados);
+}
 
-
-
-
-
-
-
-
+async function capturaDePonto(dados) {
+    return await API.get(`/get-points?initialDate=27/07/2023&endDate=28/07/2023&company-token-pg=UzvHVAgzFFuU9tj080UT&employee-token-pg=dqWBQAsDllyD8jA46eCp`, dados);
+}
 
 
 const requests = {
     cadastroEmpresa,
     cadastroColaborador,
+    registroDePonto,
+    capturaDePonto,
 }
 
 export default requests;

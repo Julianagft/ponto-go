@@ -1,25 +1,78 @@
 'use client'
-import * as React from 'react';
 
-import {Box, Typography, FormControl, TextField} from '@mui/material';
+import React, { useEffect, useState } from 'react';
+
+// BIBLIOTECA
+import {Box, FormControl, TextField} from '@mui/material';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
+
+// COMPONENTES
 import ColorButtons from '../../Components/ColorButtons';
 import TableColaboradores from '../../Components/TableColaboradores';
+import requests from '@/services/ApiRequest';
+import {obterDataHoraAtual} from '@/services/obterDataHoraAtual';
 
-
-
+// FUNÇÃO DA PÁGINA
 export default function controleDePonto() {
+  
+  const [initialDate, setInitialDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [apiResponse, setApiResponse] = useState(null);
+    
+  const handleCapturaDePonto = async () => {
+      try {
+          const response = await requests.capturaDePonto({
+            initialDate,
+            endDate,
+          });
+
+          setApiResponse(response.data);
+       
+      } catch (error) {
+          console.error('Erro ao filtrar os pontos registrados.', error.message);
+      }
+  };
+
+  // CONF DA TABLE
+
+    const dataHoraAtual = obterDataHoraAtual();
+
+    const[rows, setRows] = useState([]);
+
+    const updateTableRows = () => {
+      if (apiResponse) {
+        // Estrutura da resposta da API
+        const apiData = apiResponse.map((item) => ({
+          id: item.id, // Supondo que existe um campo 'id' na resposta da API
+          date: item.date,
+          device: item.userData.device,
+          operatingSystem: item.userData.operatingSystem,
+        }));
+  
+        setRows(apiData);
+      }
+    };
+
+    useEffect(() => {
+
+      updateTableRows();
+
+    }, [apiResponse])
    
    
     return (
-    
+
         <Box>
           <Box>
-            <Typography sx={{paddingLeft: 3, fontSize:30, fontWeight:'bold'}} variant="h6" noWrap component="div">
-                CONTROLE DE PONTO 
-              </Typography>
-              <Typography sx={{paddingLeft: 3, fontSize:16}} color="secondary" variant="h6" noWrap component="div">
-                Busque um registro de ponto. 
-              </Typography>
+
+              <div className='pl-4 font-bold text-2xl md:text-3xl'>
+                <h1>CONTROLE DE PONTO</h1>
+              </div>
+
+              <div className='text-purple-800 pl-4 mt-1'>
+                <h1>Busque um registro de ponto.</h1>
+              </div>
+
               <div className='flex flex-col md:flex-row'>
                 <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
                   <TextField 
@@ -30,6 +83,8 @@ export default function controleDePonto() {
                       InputLabelProps={{
                           shrink: true,
                       }}
+                      onChange={(e) => setInitialDate(e.target.value)}
+                     
                   />     
                 </FormControl>
 
@@ -42,27 +97,55 @@ export default function controleDePonto() {
                       InputLabelProps={{
                           shrink: true,
                       }}
+                      onChange={(e) => setEndDate(e.target.value)}
                   />     
                 </FormControl>   
               </div>
 
-                <ColorButtons label= "BUSCAR REGISTRO DE PONTO" />
+                <ColorButtons label= "BUSCAR REGISTRO DE PONTO" onClick={handleCapturaDePonto} />
           </Box>
             
           <Box>
               <div className='mt-6'>
-                <Typography sx={{paddingLeft: 3, fontSize:20, marginTop:'10px', fontWeight:'bold'}}  variant="h6" noWrap component="div">
-                Lista de Colaboradores
-                </Typography>
+              <div className='pl-4 font-medium text-base md:text-3xl'>
+                <h2>Registro de Ponto</h2>
+              </div>
+               
               </div>
               
               <div className='mt-4'>
-                <TableColaboradores />
+                <TableContainer component={Paper}>
+                  <Table sx={{ width:'70%' }} aria-label="simple table">
+
+                      <TableHead>
+                      <TableRow>
+                          <TableCell style={{fontWeight:'bold'}}>Data da Pesquisa</TableCell>
+                          <TableCell align="right" style={{fontWeight:'bold', color:'#6A1B9A'}}>Ponto Criado</TableCell>
+                          <TableCell align="right" style={{fontWeight:'bold', color:'#6A1B9A'}}>Dispositivo</TableCell>
+                          <TableCell align="right" style={{fontWeight:'bold', color:'#6A1B9A'}}>Sistema Operacional</TableCell>
+                      </TableRow>
+                      </TableHead>
+
+                      <TableBody>
+                      {rows.map((row) => (
+                          <TableRow
+                          key={row.id}
+                          sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                          >
+
+                          <TableCell>{dataHoraAtual}</TableCell>  
+                          <TableCell align="right">{row.date}</TableCell>
+                          <TableCell align="right">{row.device}</TableCell>
+                          <TableCell align="right">{row.operatingSystem}</TableCell>
+                          </TableRow>
+                      ))}
+                      </TableBody>
+                  </Table>
+                </TableContainer>
               </div>
 
           </Box>
            
         </Box>
-
     )
 }

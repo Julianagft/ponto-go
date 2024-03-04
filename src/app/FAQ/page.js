@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { Accordion, AccordionActions, AccordionSummary, AccordionDetails, Button, Box, Typography } from '@mui/material';
+
+import { Accordion, AccordionActions, AccordionSummary, AccordionDetails, Box } from '@mui/material';
 import { purple } from '@mui/material/colors';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
@@ -11,20 +11,21 @@ export default function FAQ() {
 
     return (
         <Box>
-           <Typography sx={{paddingLeft: 3, fontSize:30, fontWeight:'bold'}} variant="h6" noWrap component="div">
-                FAQ 
-            </Typography>
-            <Typography sx={{paddingLeft: 3, fontSize:16}} color="secondary" variant="h6" noWrap component="div">
-                Perguntas Mais Frequentes. 
-            </Typography>
+            <div className='pl-4 font-bold text-2xl md:text-3xl'>
+                <h1>FAQ</h1>
+            </div>
 
+            <div className='text-purple-800 pl-4 mt-1'>
+                <h1>Perguntas Mais Frequentes.</h1>
+            </div>
+           
             <div className='mt-5'>
-                <Accordion>
+                <Accordion style={{marginBottom:'20px', padding:'5px' }}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
-                    style={{ color: color, fontWeight:'bold' }}
+                    style={{ color: color, fontWeight:'bold'}}
                     >
                     Como Lançar Abono?
                     </AccordionSummary>
@@ -32,7 +33,7 @@ export default function FAQ() {
                     Basta ir em gerenciar, no seu menu principal, depois em abonos e por fim, clique em adicionar abono.
                     </AccordionDetails>
                 </Accordion>
-                <Accordion>
+                <Accordion style={{marginBottom:'20px', padding:'5px' }}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"
@@ -53,7 +54,7 @@ export default function FAQ() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion>
+                <Accordion style={{marginBottom:'20px', padding:'5px' }}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"
@@ -71,7 +72,7 @@ export default function FAQ() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion>
+                <Accordion style={{marginBottom:'20px', padding:'5px' }}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"
@@ -90,7 +91,7 @@ export default function FAQ() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion>
+                <Accordion style={{marginBottom:'20px', padding:'5px' }}>
                     <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel2-content"

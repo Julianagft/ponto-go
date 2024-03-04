@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import requests from '@/services/ApiRequest';
 
-import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Typography, Grid, styled, Stack} from '@mui/material';
+import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Grid, styled, Stack} from '@mui/material';
 import {grey} from '@mui/material/colors';
 import AttachFileIcon from '@mui/icons-material/AttachFile';
 import ColorButtons from '../../Components/ColorButtons';
@@ -78,12 +78,13 @@ const handleCadastrarEmpresa = async () => {
   return (
     <div className='w-full p-2.5'>
       <Box sx={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', flexWrap: 'wrap', minWidth: '90vw', minHeight: '100vh' }}>
-        <Typography sx={{ paddingLeft: 3, fontSize: 30, fontWeight: 'bold' }} variant="h6" noWrap component="div">
-          CADASTRAR COLABORADOR
-        </Typography>
-        <Typography sx={{ paddingLeft: 3, fontSize: 16 }} color="secondary" variant="h6" noWrap component="div">
-          Cadastre novo colaborador.
-        </Typography>
+      <div className='pl-4 font-bold	text-2xl md:text-3xl'>
+              <h1>CADASTRAR COLABORADOR</h1>
+            </div>
+
+            <div className='text-purple-800 pl-4 mt-1'>
+              <h1>Cadastre novo(a) colaborador(a).</h1>
+            </div>
 
         {/* OBS: Para criar o efeito desejado no seu componente de input com o Material-UI, onde o texto da label não é sobreposto pela borda do campo de input, você precisa assegurar que a propriedade label do OutlinedInput corresponda exatamente ao texto dentro do InputLabel. Isso permite que o Material-UI crie o "notch" (entalhe) na borda que acomoda o texto da label. */}
 

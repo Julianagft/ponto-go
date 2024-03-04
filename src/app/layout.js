@@ -1,9 +1,9 @@
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import Home from './page';
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Ponto Go",
@@ -13,7 +13,7 @@ export const metadata = {
 export default function RootLayout({children}) {
   return (
     <html lang="pt-br">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         <AppRouterCacheProvider>
           <Home>{children}</Home>
         </AppRouterCacheProvider>

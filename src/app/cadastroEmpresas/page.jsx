@@ -40,7 +40,7 @@ export default function CadastroEmpresas() {
     return (
       <div className='w-full h-full flex flex-col justify-items-center content-center flex-wrap p-8'>
 
-            <div className='pl-4  text-2xl md:text-3xl'>
+            <div className='pl-4 font-bold	text-2xl md:text-3xl'>
               <h1>CADASTRAR EMPRESA</h1>
             </div>
 
