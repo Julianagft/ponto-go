@@ -5,8 +5,15 @@ const API = axios.create({ baseURL: `https://pontogo-api.herokuapp.com`, headers
 
 async function cadastroEmpresa(dados) {
    
-    return await API.post(`/register-company`, dados)
+    return await API.post(`/register-company`, dados);
 } 
+
+async function cadastroColaborador(dados) {
+    return await API.post(`/register-employees?company-token-pg=InAcwq6mDMAzy0ubHDuc`, dados);
+}
+
+
+
 
 
 
@@ -17,7 +24,7 @@ async function cadastroEmpresa(dados) {
 
 const requests = {
     cadastroEmpresa,
-    // GetPoinst,
+    cadastroColaborador,
 }
 
 export default requests;

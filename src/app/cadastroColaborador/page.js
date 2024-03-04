@@ -1,5 +1,6 @@
 'use client'
-import * as React from 'react';
+import React, { useState } from 'react';
+import requests from '@/services/ApiRequest';
 
 import { Box, Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Typography, Grid, styled, Stack} from '@mui/material';
 import {grey} from '@mui/material/colors';
@@ -22,7 +23,41 @@ const VisuallyHiddenInput = styled('input')({
 //FUNÇÃO DA PÁGINA
 
 export default function CadastroColaborador({ children }) {
+//CONFIG DE API
 
+const [formData, setFormData] = useState({
+  email: '',
+  cpf: '',
+  firstName: '',
+  lastName: '',
+  admissionDate: '',
+  birthdate: '',
+  registration:'',
+  pis: null,
+  pointWithPicture: false,
+  companyAdmissionDate: '',
+  clt: true
+});
+
+const handleInputChange = (field, value) => {
+  setFormData((prevData) => ({
+    ...prevData,
+    [field]: value,
+  }));
+};
+
+const handleCadastrarEmpresa = async () => {
+  try {
+    const response = await requests.cadastroColaborador(formData)
+    console.log('Resposta API:', response.data);
+    alert('Colaborador(a) cadastrado(a) com sucesso');
+  } catch (error) {
+    console.error('Erro ao enviar dados do colaborador(a)', error.message);
+  }
+};
+
+
+  // CONFIG DE ESTILO
   const [CLT, setCLT] = React.useState('');
 
   const CustomButton = styled(Button)(({ theme }) => ({
@@ -50,14 +85,17 @@ export default function CadastroColaborador({ children }) {
           Cadastre novo colaborador.
         </Typography>
 
+        {/* OBS: Para criar o efeito desejado no seu componente de input com o Material-UI, onde o texto da label não é sobreposto pela borda do campo de input, você precisa assegurar que a propriedade label do OutlinedInput corresponda exatamente ao texto dentro do InputLabel. Isso permite que o Material-UI crie o "notch" (entalhe) na borda que acomoda o texto da label. */}
+
         <div className='flex flex-col justify-center md:flex-row w-ful'>
           <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
             <InputLabel color="secondary" >E-mail</InputLabel>
             <OutlinedInput
               id="outlined-basic"
               variant="outlined"
-              label="Nome Fantazia"
+              label="e-mail"
               color="secondary"
+              onChange={(e) => handleInputChange('email', e.target.value)}
             />
           </FormControl>
           <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
@@ -65,8 +103,9 @@ export default function CadastroColaborador({ children }) {
             <OutlinedInput
               id="outlined-basic"
               variant="outlined"
-              label="Razão Social"
+              label="CPF"
               color="secondary"
+              onChange={(e) => handleInputChange('cpf', e.target.value)}
             />
           </FormControl>
         </div>
@@ -77,8 +116,9 @@ export default function CadastroColaborador({ children }) {
             <OutlinedInput
               id="outlined-basic"
               variant="outlined"
-              label="E-mail"
+              label="nome*"
               color="secondary"
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
             />
           </FormControl>
           <FormControl sx={{ m: 1, width: '50%' }} variant="outlined">
@@ -86,8 +126,9 @@ export default function CadastroColaborador({ children }) {
             <OutlinedInput
               id="outlined-basic"
               variant="outlined"
-              label="Telefone"
+              label="sobrenome*"
               color="secondary"
+              onChange={(e) => handleInputChange('lasttName', e.target.value)}
             />
           </FormControl>
         </div>
@@ -102,6 +143,7 @@ export default function CadastroColaborador({ children }) {
               InputLabelProps={{
                 shrink: true,
               }}
+              onChange={(e) => handleInputChange('admissionDate', e.target.value)}
            />              
           </FormControl>
           
@@ -114,6 +156,7 @@ export default function CadastroColaborador({ children }) {
                 InputLabelProps={{
                   shrink: true,
                 }}
+              onChange={(e) => handleInputChange('birthdate', e.target.value)}
             />     
           </FormControl>
         </div>          
@@ -128,8 +171,9 @@ export default function CadastroColaborador({ children }) {
                   <OutlinedInput
                     id="outlined-basic"
                     variant="outlined"
-                    label="E-mail"
+                    label="matricula*"
                     color="secondary"
+                    onChange={(e) => handleInputChange('registration', e.target.value)}
                   />
                 </FormControl>
               </Grid>
@@ -141,8 +185,9 @@ export default function CadastroColaborador({ children }) {
                   <OutlinedInput
                     id="outlined-basic"
                     variant="outlined"
-                    label="E-mail"
+                    label="PIS"
                     color="secondary"
+                    onChange={(e) => handleInputChange('pis', e.target.value)}
                   />
                 </FormControl>
               </Grid>
@@ -155,6 +200,7 @@ export default function CadastroColaborador({ children }) {
                   size="large"
                   component="label"
                   role={undefined}
+                  onChange={(e) => handleInputChange('pointWithPicture', e.target.value)}
                   startIcon={<AttachFileIcon />}
                 >
                   Foto Colaborador
@@ -176,6 +222,7 @@ export default function CadastroColaborador({ children }) {
                     variant="outlined"
                     label="E-mail"
                     color="secondary"
+                    onChange={(e) => handleInputChange('jobTitleId', e.target.value)}
                   />
                 </FormControl>
               </Grid>
@@ -190,11 +237,12 @@ export default function CadastroColaborador({ children }) {
                     required
                     variant="outlined"
                     color="secondary"
-                    label="Data de Início dos Pontos*" 
+                    label="Data de Início dos Pontos" 
                     type="date"
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    onChange={(e) => handleInputChange('companyAdmissionDate', e.target.value)}
                   />          
                 </FormControl>
               </Grid>
@@ -206,8 +254,9 @@ export default function CadastroColaborador({ children }) {
                   <OutlinedInput
                     id="outlined-basic"
                     variant="outlined"
-                    label="E-mail"
+                    label="turno*"
                     color="secondary"
+                    onChange={(e) => handleInputChange('shiftId', e.target.value)}
                   />
                 </FormControl>
               </Grid>
@@ -217,13 +266,15 @@ export default function CadastroColaborador({ children }) {
                 <FormControl sx={{ m: 1, width:'80%', sm:{ width:'10%'}}} variant="outlined">
                   <InputLabel color="secondary">Regra de Jornada*</InputLabel>
                   <OutlinedInput
-                    id="outlined-basic"
-                    variant="outlined"
-                    label="E-mail"
+                    id="outlined-textarea"
+                    multiline
+                    
+                    label="Regra de Jornada*"
                     color="secondary"
                     InputLabelProps={{
                       shrink: true,
                     }}
+                    onChange={(e) => handleInputChange('journeyRuleId', e.target.value)}
                   />
                 </FormControl>
               </Grid>
@@ -231,13 +282,18 @@ export default function CadastroColaborador({ children }) {
               {/* Coluna 8*/}
               <Grid item xs={12} sm={6} md={3}>
                 <FormControl sx={{ m: 1, width:'80%'}} variant="outlined">
-                <InputLabel id="demo-simple-select-label">É CLT?</InputLabel>
+                <InputLabel id="demo-simple-select-label" color="secondary">É CLT?</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={CLT}
-                    label="CLT"
-                    onChange={handleChange}
+                    label="É CLT?"
+                    color="secondary"
+                    multiline
+                    onChange={(e) => {
+                      handleChange(e);
+                      handleInputChange('isCLT', e.target.value);
+                    }}
                   >
                     <MenuItem value={10}>SIM</MenuItem>
                     <MenuItem value={20}>NÃO</MenuItem>
@@ -246,7 +302,7 @@ export default function CadastroColaborador({ children }) {
               </Grid>
             </Grid>
             <Stack>
-              <ColorButtons label="CADASTRAR COLABORADOR" />
+              <ColorButtons label="CADASTRAR COLABORADOR" onClick={handleCadastrarEmpresa} />
             </Stack>
             </Box>
             

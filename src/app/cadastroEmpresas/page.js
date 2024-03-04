@@ -45,11 +45,11 @@ import ColorButtons from '../../Components/ColorButtons';
 
             <div className='flex flex-col md:flex-row'>
               <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
-                <InputLabel color="secondary" >Nome Fantazia</InputLabel>
+                <InputLabel color="secondary" >Nome Fantasia</InputLabel>
                 <OutlinedInput
                   id="outlined-basic"
                   variant="outlined"
-                  label="Nome Fantazia"
+                  label="Nome Fantasia"
                   color="secondary"
                   onChange={(e) => handleInputChange('name', e.target.value)}
                 />
