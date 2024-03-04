@@ -1,6 +1,6 @@
 'use client'
-import * as React from 'react';
 import Link from 'next/link';
+import * as React from 'react';
 import Main from '../Components/Main';
 
 // BIBLIOTECA
@@ -23,7 +23,6 @@ import Toolbar from '@mui/material/Toolbar';
 import { styled, useTheme,} from '@mui/material/styles';
 
 //ICONS
-import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CorporateFareIcon from '@mui/icons-material/CorporateFare';
@@ -37,6 +36,7 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 
 //COLORS
 import { grey } from '@mui/material/colors';
+
 
 const drawerWidth = 240;
 
@@ -105,6 +105,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+//FUNÇÃO DA PÁGINA
+
 export default function Home({children}) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -117,6 +119,7 @@ export default function Home({children}) {
     setOpen(false);
   };
 
+
   const menuItems = [
     { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href: `/cadastroEmpresas`},
     { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'/cadastroColaborador' },
@@ -126,22 +129,23 @@ export default function Home({children}) {
     { text: 'FAQ', icon: <QuestionMarkIcon />, href:'/FAQ'},
   ];
 
-  const color1 = grey[100]
+  const color1 = grey[400]
   const color2 = grey[900]
 
   return (
-
+ 
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar sx={{ backgroundColor: color1 }} >
+        <Toolbar 
+          sx={{ backgroundColor: color1 }} 
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              color: '#000000',
               marginRight: 5,
               ...(open && { display: 'none' }),
             }}
@@ -149,25 +153,30 @@ export default function Home({children}) {
             <MenuIcon />
           </IconButton>
           <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
-          
+         
+
         </Toolbar>
       </AppBar>
-
       <Drawer variant="permanent" open={open}>
 
         <DrawerHeader>
-          <IconButton 
-            onClick={handleDrawerClose}
-            sx={{
-              color: '#000000'
-            }} 
-          >
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ArrowBackOutlinedIcon />}
+          <IconButton onClick={handleDrawerClose} style={{ color: color2 }} >
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </DrawerHeader>
+        
+        <Stack
+          direction= "row"
+          alignItems="center"
+          justifyContent="center"
+          spacing={2}
+          mt={2.5}
+          sx={{ display: open ? 'flex' : 'none'}}
+        >
+          </Stack>
 
         <Divider />
-
+        
         <Stack
           direction= "column"
           alignItems="center"
@@ -219,7 +228,8 @@ export default function Home({children}) {
                 
                 </ListItem>         
             ))}
-        </List>       
+        </List>
+
       </Drawer>
       <Main>{children}</Main> 
     </Box>
