@@ -107,8 +107,8 @@ export default function controleDePonto() {
             
           <Box>
               <div className='mt-6'>
-              <div className='pl-4 font-medium text-base md:text-3xl'>
-                <h2>Registro de Ponto</h2>
+              <div className='pl-4 font-medium md:text-3xl'>
+                <h2 className='text-2xl'>Registro de Ponto</h2>
               </div>
                
               </div>

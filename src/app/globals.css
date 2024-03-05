@@ -3,10 +3,3 @@
 @tailwind utilities;
 
 
-* {
-  box-sizing: border-box;
-}
-
-body, html {
-  width: 100%;
-}
