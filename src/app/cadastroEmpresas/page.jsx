@@ -38,9 +38,9 @@ export default function CadastroEmpresas() {
     };
     
     return (
-      <div className='w-full h-full flex flex-col justify-items-center content-center flex-wrap p-8'>
+      <div className='w-full h-full flex flex-col justify-items-center content-center flex-wrap p-8 gap-2.5'>
 
-            <div className='pl-4 font-bold	text-2xl md:text-3xl'>
+            <div className='pl-4 font-bold text-xl md:text-3xl'>
               <h1>CADASTRAR EMPRESA</h1>
             </div>
 
@@ -48,31 +48,35 @@ export default function CadastroEmpresas() {
               <h1>Cadastre nova uma empresa.</h1>
             </div>
            
-            <div className='flex flex-col md:flex-row'>
-              <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
-                <InputLabel color="secondary" >Nome Fantasia</InputLabel>
-                <OutlinedInput
-                  id="outlined-basic"
-                  variant="outlined"
-                  label="Nome Fantasia"
-                  color="secondary"
-                  onChange={(e) => handleInputChange('name', e.target.value)}
-                />
-              </FormControl>
-              <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
-                  <InputLabel color="secondary" >Razão Social</InputLabel>
+            <div className='flex flex-col md:flex-row justify-center w-full gap-2.5 shrink'>
+              <div className='w-full md:w-1/2'>
+                <FormControl sx={{width:'100%' }} variant="outlined">
+                  <InputLabel color="secondary" >Nome Fantasia</InputLabel>
                   <OutlinedInput
                     id="outlined-basic"
                     variant="outlined"
-                    label="Razão Social"
+                    label="Nome Fantasia"
                     color="secondary"
-                    onChange={(e) => handleInputChange('razaoSocial', e.target.value)}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
                   />
                 </FormControl>
+              </div>
+              <div className='w-full md:w-1/2'>
+                <FormControl sx={{width:'100%' }} variant="outlined">
+                    <InputLabel color="secondary" >Razão Social</InputLabel>
+                    <OutlinedInput
+                      id="outlined-basic"
+                      variant="outlined"
+                      label="Razão Social"
+                      color="secondary"
+                      onChange={(e) => handleInputChange('razaoSocial', e.target.value)}
+                    />
+                  </FormControl>
+              </div>
             </div>
 
-            <div className='flex w-6/12 md:w-full justify-self-center w-11/1 justify-center'>
-              <FormControl sx={{ m: 1, flexShrink:1, width:'100%'}}>
+            <div className='flex justify-self-center w-full justify-center'>
+              <FormControl sx={{ width:'100%'}}>
                 <InputLabel color="secondary" >CNPJ</InputLabel>
                 <OutlinedInput
                   id="outlined-basic"
@@ -84,27 +88,31 @@ export default function CadastroEmpresas() {
               </FormControl>
             </div>
 
-            <div className='flex flex-col md:flex-row'>
-              <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
-                <InputLabel color="secondary" >E-mail</InputLabel>
-                <OutlinedInput
-                  id="outlined-basic"
-                  variant="outlined"
-                  label="E-mail"
-                  color="secondary"
-                  onChange={(e) => handleInputChange('email', e.target.value)}
-                />
-              </FormControl>
-              <FormControl sx={{ m: 1, width: '50%', flexShrink:1 }} variant="outlined">
-                  <InputLabel color="secondary" >Telefone</InputLabel>
+            <div className='flex flex-col md:flex-row justify-center w-full gap-2.5 shrink'>
+              <div className='flex justify-self-center w-full justify-center'>
+                <FormControl sx={{width: '100%'}} variant="outlined">
+                  <InputLabel color="secondary" >E-mail</InputLabel>
                   <OutlinedInput
                     id="outlined-basic"
                     variant="outlined"
-                    label="Telefone"
+                    label="E-mail"
                     color="secondary"
-                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
                   />
                 </FormControl>
+              </div>
+              <div className='flex justify-self-center w-full justify-center'>
+                <FormControl sx={{width: '100%'}} variant="outlined">
+                    <InputLabel color="secondary" >Telefone</InputLabel>
+                    <OutlinedInput
+                      id="outlined-basic"
+                      variant="outlined"
+                      label="Telefone"
+                      color="secondary"
+                      onChange={(e) => handleInputChange('phone', e.target.value)}
+                    />
+                  </FormControl>
+              </div>
             </div>
             <ColorButtons label="CADASTRAR EMPRESA" onClick={handleCadastrarEmpresa} ></ColorButtons> 
       </div>
