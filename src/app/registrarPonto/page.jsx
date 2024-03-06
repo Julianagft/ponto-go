@@ -12,39 +12,41 @@ import { Box, TextField } from "@mui/material";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 
-// const getCurrentDateTimeInBrasilia = () => {
-//     const localDate = new Date();
-//     const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
-//     const year = brasiliaDate.getFullYear();
-//     const month = String(brasiliaDate.getMonth() + 1).padStart(2, "0");
-//     const day = String(brasiliaDate.getDate()).padStart(2, "0");
-//     const hours = String(brasiliaDate.getHours()).padStart(2, "0");
-//     const minutes = String(brasiliaDate.getMinutes()).padStart(2, "0");
-
-//     return `${year}-${month}-${day}T${hours}:${minutes}`;
-// };
-
 const getCurrentDateTimeInBrasilia = () => {
     const localDate = new Date();
-    const brasiliaOffset = -3; 
-    localDate.setHours(localDate.getHours() + brasiliaOffset);
-    
-    let formattedDate = localDate.toISOString().slice(0, -1); 
-    formattedDate += (brasiliaOffset < 0 ? `${brasiliaOffset}:00` : `+${brasiliaOffset}:00`); 
+    const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    const year = brasiliaDate.getFullYear();
+    const month = String(brasiliaDate.getMonth() + 1).padStart(2, "0");
+    const day = String(brasiliaDate.getDate()).padStart(2, "0");
+    const hours = String(brasiliaDate.getHours()).padStart(2, "0");
+    const minutes = String(brasiliaDate.getMinutes()).padStart(2, "0");
 
-    return formattedDate;
+    return `${year}-${month}-${day}T${hours}:${minutes}`;
 };
+
 
 const initialValues = {
-    currentDate: getCurrentDateTimeInBrasilia(),
+    initialValues: getCurrentDateTimeInBrasilia(),
 };
+
+// const formattedDateBrasilia = () => {
+//     const localDate = new Date();
+//     const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+
+//     // Formate a data e hora no formato esperado pela API
+//     const formattedDate = brasiliaDate.toISOString().slice(0, -1); // Remova o "Z" no final
+
+//     return formattedDate;
+// }
 
 const formattedDateBrasilia = () => {
     const localDate = new Date();
+    // Converta a data local para o fuso horário de Brasília, mas mantenha a representação no formato UTC
     const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
 
-    // Formate a data e hora no formato esperado pela API
-    const formattedDate = brasiliaDate.toISOString().slice(0, -1); // Remova o "Z" no final
+    // Formate a data e hora para incluir milissegundos e a letra 'Z' no final
+    // A função toISOString já retorna a data em UTC com milissegundos
+    const formattedDate = brasiliaDate.toISOString();
 
     return formattedDate;
 }
