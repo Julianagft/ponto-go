@@ -1,7 +1,7 @@
 # Desafio Ponto-Go .
 
 
-Desafio Técnico - Ponto Eletrônico Interativo
+##Desafio Técnico - Ponto Eletrônico Interativo
 
 🔗 Confira o resultado aqui.(https://ponto-go-six.vercel.app/homePage)
 
@@ -18,7 +18,7 @@ O desafio era realizar as seguintes etapas:
 
 3- Construir a aplicação usando React:
 
-🛠️ Tecnologias Utilizadas
+🛠️ ##Tecnologias Utilizadas
 
 Next.js: Estrutura web de desenvolvimento front-end React de código aberto criada por Vercel que permite funcionalidades como renderização do lado do servidor e geração de sites estáticos para aplicativos da web baseados em React.
 
