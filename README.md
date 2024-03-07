@@ -1,4 +1,4 @@
-# Desafio Ponto-Go .
+# Desafio Ponto-Go 
 
 
 ## Desafio Técnico - Ponto Eletrônico Interativo
