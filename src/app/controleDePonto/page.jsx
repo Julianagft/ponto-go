@@ -8,9 +8,8 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper
 
 // COMPONENTES
 import ColorButtons from '../../Components/ColorButtons';
-import TableColaboradores from '../../Components/TableColaboradores';
-import requests from '@/services/ApiRequest';
-import { obterDataHoraAtual } from '@/services/obterDataHoraAtual';
+import requests from '../../services/ApiRequest';
+import { obterDataHoraAtual } from '../../services/obterDataHoraAtual';
 
 // FUNÇÃO DA PÁGINA
 export default function controleDePonto() {
@@ -21,13 +20,25 @@ export default function controleDePonto() {
 
   const handleCapturaDePonto = async () => {
     try {
-      const response = await requests.capturaDePonto({
-        initialDate,
-        endDate,
-      });
+      // Check if both initialDate and endDate are filled
+      if (initialDate && endDate) {
+        // Check if initialDate is less than endDate
+        if (new Date(initialDate) <= new Date(endDate)) {
+          const response = await requests.capturaDePonto({
+            initialDate,
+            endDate,
+          });
+          console.log('Ponto encontrado com sucesso')
+          setApiResponse(response.data);
+        } else {
+          console.error('Data inicial deve ser menor que a data final.');
+          window.alert('Data inicial deve ser menor que a data final!')
+        }
+      } else {
+        console.error('Por favor, preencha ambas as datas.');
+        window.alert('Por favor, preencha ambas as datas!')
 
-      setApiResponse(response.data);
-
+      }
     } catch (error) {
       console.error('Erro ao filtrar os pontos registrados.', error.message);
     }

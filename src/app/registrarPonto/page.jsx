@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 // COMPONENTES
 import ColorButtons from "../../Components/ColorButtons";
-import requests from '@/services/ApiRequest';
+import requests from '../../services/ApiRequest';
 
 // BIBLIOTECAS
 import * as yup from "yup";
@@ -13,43 +13,27 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 
 
 const getCurrentDateTimeInBrasilia = () => {
-    const localDate = new Date();
-    const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
-    const year = brasiliaDate.getFullYear();
-    const month = String(brasiliaDate.getMonth() + 1).padStart(2, "0");
-    const day = String(brasiliaDate.getDate()).padStart(2, "0");
-    const hours = String(brasiliaDate.getHours()).padStart(2, "0");
-    const minutes = String(brasiliaDate.getMinutes()).padStart(2, "0");
+    const currentTime = new Date();
+    const brasiliaOffset = -3;
+    const localOffset = currentTime.getTimezoneOffset() * 60000;
+    const brasiliaTime = new Date(currentTime.getTime() + localOffset + (3600000 * brasiliaOffset));
 
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
+    let formattedDateTime = brasiliaTime.toISOString()
+    .replace(/\.\d+Z$/, ''); 
+    
+    const timezoneOffsetFormatted = (brasiliaOffset >= 0 ? '+' : '-') + 
+                                  String(Math.abs(brasiliaOffset)).padStart(2, '0') + ':00';
+    
+    formattedDateTime += timezoneOffsetFormatted;
+
+    return formattedDateTime;
 };
 
 
-const initialValues = {
+const date = {
     initialValues: getCurrentDateTimeInBrasilia(),
 };
 
-// const formattedDateBrasilia = () => {
-//     const localDate = new Date();
-//     const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
-
-//     // Formate a data e hora no formato esperado pela API
-//     const formattedDate = brasiliaDate.toISOString().slice(0, -1); // Remova o "Z" no final
-
-//     return formattedDate;
-// }
-
-const formattedDateBrasilia = () => {
-    const localDate = new Date();
-    // Converta a data local para o fuso horário de Brasília, mas mantenha a representação no formato UTC
-    const brasiliaDate = new Date(localDate.toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
-
-    // Formate a data e hora para incluir milissegundos e a letra 'Z' no final
-    // A função toISOString já retorna a data em UTC com milissegundos
-    const formattedDate = brasiliaDate.toISOString();
-
-    return formattedDate;
-}
 
 //FUNÇÃO DA PÁGINA
 
@@ -59,9 +43,7 @@ export default function RegistrarPonto() {
 
     //CONF DE API  
     const [formData, setFormData] = useState({
-        date: '2022-10-13T18:15:30.728Z',
-        latitude: null,
-        longitude: null,
+        date: getCurrentDateTimeInBrasilia(),
     });
 
     const handleInputChange = (field, value) => {
@@ -95,7 +77,7 @@ export default function RegistrarPonto() {
             
             <div className='flex flex-col w-full gap-2.5 shrink'>
                 <Formik
-                    initialValues={initialValues}
+                    initialValues={date}
                     validationSchema={checkoutSchema}
                 >
                     {({

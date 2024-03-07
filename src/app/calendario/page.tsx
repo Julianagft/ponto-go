@@ -95,7 +95,7 @@ export default function Home() {
     setAllEvents([...allEvents, newEvent])
     setShowModal(false)
     setNewEvent({
-      title: '',
+      title: '',    
       start: '',
       allDay: false,
       id: 0

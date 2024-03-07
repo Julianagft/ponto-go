@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react';
-import requests from '@/services/ApiRequest';
+import requests from '../../services/ApiRequest';
 
 import {Button, OutlinedInput, InputLabel, FormControl, TextField, Select, MenuItem, Grid, styled, Stack } from '@mui/material';
 import { grey, purple } from '@mui/material/colors';
@@ -23,7 +23,8 @@ const VisuallyHiddenInput = styled('input')({
 //FUNÇÃO DA PÁGINA
 
 export default function CadastroColaborador({ children }) {
-  //CONFIG DE API
+  
+  // CONFIG DE API
 
   const [formData, setFormData] = useState({
     email: '',
@@ -46,7 +47,13 @@ export default function CadastroColaborador({ children }) {
     }));
   };
 
-  const handleCadastrarEmpresa = async () => {
+  const handleCadastrarColaborador = async () => {
+
+    if (!validateFields()) { // Verifica se todos os campos obrigatórios estão preenchidos
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return; // Interrompe a execução se algum campo obrigatório estiver vazio
+    }
+
     try {
       const response = await requests.cadastroColaborador(formData)
       console.log('Resposta API:', response.data);
@@ -54,6 +61,25 @@ export default function CadastroColaborador({ children }) {
     } catch (error) {
       console.error('Erro ao enviar dados do colaborador(a)', error.message);
     }
+  };
+
+  // CONF DE VALIDAÇÃO
+
+  const [fieldErrors, setFieldErrors] = useState({});
+  
+  const validateFields = () => {
+    const errors = {};
+    const requiredFields = ['firstName', 'lastName', 'registration', 'admissionDate', 'jobTitleId', 'birthdate', 'companyAdmissionDate'];
+  
+    requiredFields.forEach(field => {
+      // Verifica se o campo está vazio, nulo ou indefinido
+      if (!formData[field] || formData[field] === null || formData[field] === undefined) {
+        errors[field] = true; // Marca o campo como erro se estiver vazio
+      }
+    });
+    console.log(errors)
+    setFieldErrors(errors);
+    return Object.keys(errors).length === 0; // Retorna true se não houver erros
   };
 
 
@@ -130,6 +156,7 @@ export default function CadastroColaborador({ children }) {
               variant="outlined"
               label="nome*"
               color="secondary"
+              error={fieldErrors['firstName']} 
               onChange={(e) => handleInputChange('firstName', e.target.value)}
             />
           </FormControl>
@@ -143,7 +170,8 @@ export default function CadastroColaborador({ children }) {
               variant="outlined"
               label="sobrenome*"
               color="secondary"
-              onChange={(e) => handleInputChange('lasttName', e.target.value)}
+              error={fieldErrors['firstName']} 
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
             />
           </FormControl>
         </div>
@@ -162,6 +190,7 @@ export default function CadastroColaborador({ children }) {
               InputLabelProps={{
                 shrink: true,
               }}
+              error={fieldErrors['firstName']} 
               onChange={(e) => handleInputChange('admissionDate', e.target.value)}
             />
           </FormControl>
@@ -177,6 +206,7 @@ export default function CadastroColaborador({ children }) {
               InputLabelProps={{
                 shrink: true,
               }}
+              error={fieldErrors['firstName']} 
               onChange={(e) => handleInputChange('birthdate', e.target.value)}
             />
           </FormControl>
@@ -196,6 +226,7 @@ export default function CadastroColaborador({ children }) {
                     variant="outlined"
                     label="matricula*"
                     color="secondary"
+                    error={fieldErrors['firstName']} 
                     onChange={(e) => handleInputChange('registration', e.target.value)}
                   />
                 </FormControl>
@@ -220,6 +251,7 @@ export default function CadastroColaborador({ children }) {
               <FormControl sx={{width:'100%'}} variant="outlined">
                 <TextField
                   required
+                  error={fieldErrors['firstName']} 
                   variant="outlined"
                   color="secondary"
                   label="Data de Início dos Pontos"
@@ -240,6 +272,7 @@ export default function CadastroColaborador({ children }) {
                   variant="outlined"
                   label="turno*"
                   color="secondary"
+                  error={fieldErrors['firstName']} 
                   onChange={(e) => handleInputChange('shiftId', e.target.value)}
                 />
               </FormControl>
@@ -277,6 +310,7 @@ export default function CadastroColaborador({ children }) {
                     variant="outlined"
                     label="E-mail"
                     color="secondary"
+                    error={fieldErrors['firstName']} 
                     onChange={(e) => handleInputChange('jobTitleId', e.target.value)}
                   />
                 </FormControl>
@@ -296,6 +330,7 @@ export default function CadastroColaborador({ children }) {
                   InputLabelProps={{
                     shrink: true,
                   }}
+                  error={fieldErrors['firstName']} 
                   onChange={(e) => handleInputChange('journeyRuleId', e.target.value)}
                 />
               </FormControl>  
@@ -325,7 +360,7 @@ export default function CadastroColaborador({ children }) {
         </div>
       </div>
         <Stack>
-          <ColorButtons label="CADASTRAR COLABORADOR" onClick={handleCadastrarEmpresa} />
+          <ColorButtons label="CADASTRAR COLABORADOR" onClick={handleCadastrarColaborador} />
         </Stack>
       {children}
     </div>

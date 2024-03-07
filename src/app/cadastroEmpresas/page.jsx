@@ -1,11 +1,12 @@
 'use client'
 import React, { useState } from 'react';
-import requests from '@/services/ApiRequest';
+import requests from '../../services/ApiRequest';
 
 // BIBLIOTECA
 import {OutlinedInput, InputLabel, FormControl, Typography} from '@mui/material';
 import ColorButtons from '../../Components/ColorButtons';
 
+requests
 
 
 export default function CadastroEmpresas() {
