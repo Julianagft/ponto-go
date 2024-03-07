@@ -8,104 +8,94 @@ import { Dialog, Transition } from '@headlessui/react'
 import { EventSourceInput } from '@fullcalendar/core/index.js'
 
 
-interface Event {
-  title: string;
-  start: Date | string;
-  allDay: boolean;
-  id: number;
-}
-
 export default function Calendar() {
   const [events, setEvents] = useState([
-    { title: 'event 1', id: '1' },
-    { title: 'event 2', id: '2' },
-    { title: 'event 3', id: '3' },
-    { title: 'event 4', id: '4' },
-    { title: 'event 5', id: '5' },
-  ])
-  const [allEvents, setAllEvents] = useState<Event[]>([])
-  const [showModal, setShowModal] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [idToDelete, setIdToDelete] = useState<number | null>(null)
-  const [newEvent, setNewEvent] = useState<Event>({
+    { title: 'evento 1', id: '1' },
+    { title: 'evento 2', id: '2' },
+    { title: 'evento 3', id: '3' },
+    { title: 'evento 4', id: '4' },
+    { title: 'evento 5', id: '5' },
+  ]);
+  const [allEvents, setAllEvents] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [idToDelete, setIdToDelete] = useState(null);
+  const [newEvent, setNewEvent] = useState({
     title: '',
     start: '',
     allDay: false,
     id: 0
-  })
+  });
 
   useEffect(() => {
-    let draggableEl = document.getElementById('draggable-el')
+    let draggableEl = document.getElementById('draggable-el');
     if (draggableEl) {
       new Draggable(draggableEl, {
         itemSelector: ".fc-event",
         eventData: function (eventEl) {
-          let title = eventEl.getAttribute("title")
-          let id = eventEl.getAttribute("data")
-          let start = eventEl.getAttribute("start")
-          return { title, id, start }
+          let title = eventEl.getAttribute("title");
+          let id = eventEl.getAttribute("data");
+          let start = eventEl.getAttribute("start");
+          return { title, id, start };
         }
-      })
+      });
     }
-  }, [])
+  }, []);
 
-  function handleDateClick(arg: { date: Date, allDay: boolean }) {
-    setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() })
-    setShowModal(true)
+  function handleDateClick(arg) {
+    setNewEvent({ ...newEvent, start: arg.date, allDay: arg.allDay, id: new Date().getTime() });
+    setShowModal(true);
   }
 
-  function addEvent(data: DropArg) {
-    const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() }
-    setAllEvents([...allEvents, event])
+  function addEvent(data) {
+    const event = { ...newEvent, start: data.date.toISOString(), title: data.draggedEl.innerText, allDay: data.allDay, id: new Date().getTime() };
+    setAllEvents([...allEvents, event]);
   }
 
-  function handleDeleteModal(data: { event: { id: string } }) {
-    setShowDeleteModal(true)
-    setIdToDelete(Number(data.event.id))
+  function handleDeleteModal(data) {
+    setShowDeleteModal(true);
+    setIdToDelete(Number(data.event.id));
   }
 
   function handleDelete() {
-    setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)))
-    setShowDeleteModal(false)
-    setIdToDelete(null)
+    setAllEvents(allEvents.filter(event => Number(event.id) !== Number(idToDelete)));
+    setShowDeleteModal(false);
+    setIdToDelete(null);
   }
 
   function handleCloseModal() {
-    setShowModal(false)
+    setShowModal(false);
     setNewEvent({
       title: '',
       start: '',
       allDay: false,
       id: 0
-    })
-    setShowDeleteModal(false)
-    setIdToDelete(null)
+    });
+    setShowDeleteModal(false);
+    setIdToDelete(null);
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e) => {
     setNewEvent({
       ...newEvent,
       title: e.target.value
-    })
+    });
   }
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setAllEvents([...allEvents, newEvent])
-    setShowModal(false)
+  function handleSubmit(e) {
+    e.preventDefault();
+    setAllEvents([...allEvents, newEvent]);
+    setShowModal(false);
     setNewEvent({
       title: '',
       start: '',
       allDay: false,
       id: 0
-    })
+    });
   }
 
   return (
     <>
-      <nav className="flex justify-between mb-12 border-b border-violet-100 p-4">
-        <h1 className="font-bold text-2xl text-gray-700">Calendar</h1>
-      </nav>
       <main className="flex min-h-screen flex-col items-center justify-between p-24">
         <div className="grid grid-cols-10">
           <div className="col-span-8">
@@ -120,7 +110,7 @@ export default function Calendar() {
                 center: 'title',
                 right: 'resourceTimelineWook, dayGridMonth,timeGridWeek'
               }}
-              events={allEvents as EventSourceInput}
+              events={allEvents}
               nowIndicator={true}
               editable={true}
               droppable={true}
@@ -131,8 +121,8 @@ export default function Calendar() {
               eventClick={(data) => handleDeleteModal(data)}
             />
           </div>
-          <div id="draggable-el" className="ml-8 w-full border-2 p-2 rounded-md mt-16 lg:h-1/2 bg-violet-50">
-            <h1 className="font-bold text-lg text-center">Drag Event</h1>
+          <div id="draggable-el" className="ml-8 w-full border-2 p-2 rounded-md mt-16 lg:h-1/2 hidden lg:block bg-violet-50">
+            <h1 className="font-bold text-sm text-center">Arraste um Evento</h1>
             {events.map(event => (
               <div
                 className="fc-event border-2 p-1 m-2 w-full rounded-md ml-auto text-center bg-white"
@@ -184,11 +174,11 @@ export default function Calendar() {
                         </div>
                         <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                           <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                            Delete Event
+                            Deletar Evento
                           </Dialog.Title>
                           <div className="mt-2">
                             <p className="text-sm text-gray-500">
-                              Are you sure you want to delete this event?
+                              Tem certeza que deseja deletar este evento?
                             </p>
                           </div>
                         </div>
@@ -197,13 +187,13 @@ export default function Calendar() {
                     <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                       <button type="button" className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm 
                       font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto" onClick={handleDelete}>
-                        Delete
+                        Deletar
                       </button>
                       <button type="button" className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 
                       shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                         onClick={handleCloseModal}
                       >
-                        Cancel
+                        Cancelar
                       </button>
                     </div>
                   </Dialog.Panel>
@@ -246,7 +236,7 @@ export default function Calendar() {
                       </div>
                       <div className="mt-3 text-center sm:mt-5">
                         <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                          Add Event
+                          Adicione um Evento
                         </Dialog.Title>
                         <form action="submit" onSubmit={handleSubmit}>
                           <div className="mt-2">
@@ -263,7 +253,7 @@ export default function Calendar() {
                               className="inline-flex w-full justify-center rounded-md bg-violet-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-violet-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 sm:col-start-2 disabled:opacity-25"
                               disabled={newEvent.title === ''}
                             >
-                              Create
+                              Criar
                             </button>
                             <button
                               type="button"
@@ -271,7 +261,7 @@ export default function Calendar() {
                               onClick={handleCloseModal}
 
                             >
-                              Cancel
+                              Cancelar
                             </button>
                           </div>
                         </form>

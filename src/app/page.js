@@ -1,6 +1,8 @@
 'use client'
 import * as React from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react'; 
+import { useRouter } from 'next/navigation';
 import Main from '../Components/Main';
 
 // BIBLIOTECA
@@ -117,6 +119,11 @@ export default function Home({children}) {
     setOpen(false);
   };
 
+  const color1 = grey[100]
+  const color2 = grey[900]
+
+  // CONF DE ROTA
+
   const menuItems = [
     { text: 'Cadastrar Empresa', icon: <CorporateFareIcon />, href: `/cadastroEmpresas`},
     { text: 'Cadastrar Funcionário', icon: <GroupAddIcon />, href:'/cadastroColaborador' },
@@ -126,9 +133,13 @@ export default function Home({children}) {
     { text: 'FAQ', icon: <QuestionMarkIcon />, href:'/FAQ'},
   ];
 
-  const color1 = grey[100]
-  const color2 = grey[900]
+  const router = useRouter(); 
+  const [currentPage, setCurrentPage] = useState('homePage');
 
+  useEffect(() => { // Passo 3: Adicione o useEffect
+    router.push('/homePage'); // Passo 4: Redirecione para '/homePage'
+  }, []);
+  
   return (
 
     <Box sx={{ display: 'flex' }}>
@@ -148,6 +159,9 @@ export default function Home({children}) {
           >
             <MenuIcon />
           </IconButton>
+          <div className='text-zinc-700'>
+          <Button style={{color:'#808080', fontWeight: 'bold'}} href="/homePage">HOME</Button>
+          </div>
           <img alt="logo-ponto-go" src="/images/logo.png" className='max-w-44 m-auto' />
           
         </Toolbar>
