@@ -22,7 +22,7 @@ const VisuallyHiddenInput = styled('input')({
 
 //FUNÇÃO DA PÁGINA
 
-export default function CadastroColaborador({ children }) {
+export default function CadastroColaborador() {
   
   // CONFIG DE API
 
@@ -187,10 +187,10 @@ export default function CadastroColaborador({ children }) {
               color="secondary"
               label="Data de Admissão*"
               type="date"
+              error={fieldErrors['firstName']} 
               InputLabelProps={{
                 shrink: true,
               }}
-              error={fieldErrors['firstName']} 
               onChange={(e) => handleInputChange('admissionDate', e.target.value)}
             />
           </FormControl>
@@ -362,7 +362,6 @@ export default function CadastroColaborador({ children }) {
         <Stack>
           <ColorButtons label="CADASTRAR COLABORADOR" onClick={handleCadastrarColaborador} />
         </Stack>
-      {children}
     </div>
   );
 }
